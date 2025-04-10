@@ -1,4 +1,4 @@
-package animeutils
+package go_go_animes
 
 import "fmt"
 
