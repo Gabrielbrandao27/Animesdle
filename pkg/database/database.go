@@ -62,7 +62,7 @@ func RunMigrations(db *sql.DB) error {
 				INSERT INTO characters_naruto (img_ref, name, species, place_origin, intro_arc, affiliation, chakra_type, kekkei_genkai, jutsu_affinity, special_attribute)
 				VALUES
 					("example.jpg", "Sasuke Uchiha", "Human", "Konohagakure", "Prologue", "Team 7, Taka, Akatsuki", "Fire Release", "Sharingan", "Ninjutsu, Genjutsu, Taijutsu", "Rinnegan")
-				ON DUPLICATE KEY UPDATE name = name,`
+				ON DUPLICATE KEY UPDATE name = VALUES(name);`
 	if _, err := db.Exec(insert_naruto); err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func RunMigrations(db *sql.DB) error {
 				VALUES 
 					("example.jpg", "Monkey D. Luffy", "Human", "Foosha Village", "Romance Dawn", "Straw Hat Pirates", 1500000000, "Observation, Armament, Conquerour", "Hito-Hito no mi: model Nika", 174),
 					("example.jpg", "Roronoa Zoro", "Human", "Shimotsuki Village", "Romance Dawn", "Straw Hat Pirates", 1111000000, "Observation, Armament", "None", 181)
-				ON DUPLICATE KEY UPDATE name = name;`
+				ON DUPLICATE KEY UPDATE name = VALUES(name);`
 	if _, err := db.Exec(insert_onepiece); err != nil {
 		return err
 	}
