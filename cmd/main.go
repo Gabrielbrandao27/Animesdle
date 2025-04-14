@@ -20,7 +20,7 @@ func main() {
 	animeHandler := anime.NewAnimeHandler(animeService)
 
 	http.HandleFunc("/start-game", animeHandler.StartGameHandler)
-	// http.HandleFunc("/attempt", anime.AttemptHandler)
+	http.HandleFunc("/attempt", animeHandler.AttemptHandler)
 	http.ListenAndServe(":8080", nil)
 
 }

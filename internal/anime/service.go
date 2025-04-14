@@ -33,8 +33,8 @@ func (s *animeServiceStruct) GenerateRandomCharacter(ctx context.Context, animeN
 	return character, nil
 }
 
-func (s *animeServiceStruct) ProcessAttempt(ctx context.Context, currentCharacter any, name string, animeName string) (any, error) {
-	guessedCharacter, err := s.repo.GetAnimeCharacter(ctx, name, animeName)
+func (s *animeServiceStruct) ProcessAttempt(ctx context.Context, currentCharacter any, attemptedName string, animeName string) (any, error) {
+	guessedCharacter, err := s.repo.GetAnimeCharacter(ctx, attemptedName, animeName)
 	if err != nil {
 		return nil, err
 	}
