@@ -27,3 +27,32 @@ type OnePiece struct {
 	DevilFruit  string `json:"devil_fruit" db:"devil_fruit"`
 	Height      int    `json:"height" db:"height"`
 }
+
+type FieldComparison struct {
+	Value  string // valor do campo no palpite do jogador
+	Status string // "correct", "partial", "wrong"
+}
+
+type NarutoComparisonResult struct {
+	Name             string // esse é só o nome para exibir quem ele tentou
+	Species          FieldComparison
+	PlaceOrigin      FieldComparison
+	IntroArc         FieldComparison
+	Affiliation      FieldComparison
+	ChakraType       FieldComparison
+	KekkeiGenkai     FieldComparison
+	JutsuAffinity    FieldComparison
+	SpecialAttribute FieldComparison
+}
+
+type OnePieceComparisonResult struct {
+	Name        string
+	Species     FieldComparison
+	PlaceOrigin FieldComparison
+	IntroArc    FieldComparison
+	Affiliation FieldComparison
+	Bounty      FieldComparison
+	Haki        FieldComparison
+	DevilFruit  FieldComparison
+	Height      FieldComparison
+}
