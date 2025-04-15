@@ -4,10 +4,16 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"os"
+	"strconv"
 )
 
 type AnimeHandler struct {
 	service AnimeService
+}
+
+type AnimeHandlerRepository struct {
+	repository AnimeRepository
 }
 
 type AttemptRequest struct {
@@ -18,6 +24,10 @@ type AttemptRequest struct {
 
 func NewAnimeHandler(service AnimeService) *AnimeHandler {
 	return &AnimeHandler{service: service}
+}
+
+func NewAnimeRepositoryHandler(repository AnimeRepository) *AnimeHandlerRepository {
+	return &AnimeHandlerRepository{repository: repository}
 }
 
 func (h *AnimeHandler) StartGameHandler(w http.ResponseWriter, r *http.Request) {
@@ -71,4 +81,48 @@ func (h *AnimeHandler) AttemptHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(result)
+}
+
+func (repo *AnimeHandlerRepository) DeleteRowsHandler(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("Authorization")
+	expectedToken := os.Getenv("TOKEN")
+
+	if token != expectedToken {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	anime := r.URL.Query().Get("anime")
+	if anime == "" {
+		http.Error(w, "anime parameter is required", http.StatusBadRequest)
+		return
+	}
+
+	var id *int64
+	idStr := r.URL.Query().Get("id")
+	if idStr != "" {
+		parsedID, err := strconv.ParseInt(idStr, 10, 64)
+		if err != nil {
+			http.Error(w, "invalid id parameter", http.StatusBadRequest)
+			return
+		}
+		id = &parsedID
+	}
+
+	if id == nil {
+		err := repo.repository.DeleteRows(r.Context(), anime, nil)
+		if err != nil {
+			http.Error(w, "error deleting rows: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+	} else {
+		err := repo.repository.DeleteRows(r.Context(), anime, id)
+		if err != nil {
+			http.Error(w, "error deleting rows: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Rows deleted successfully"))
 }

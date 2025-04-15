@@ -61,7 +61,14 @@ func RunMigrations(db *sql.DB) error {
 	insert_naruto := `
 				INSERT INTO characters_naruto (img_ref, name, species, place_origin, intro_arc, affiliation, chakra_type, kekkei_genkai, jutsu_affinity, special_attribute)
 				VALUES
-					("example.jpg", "Sasuke Uchiha", "Human", "Konohagakure", "Prologue", "Team 7, Taka, Akatsuki", "Fire Release", "Sharingan", "Ninjutsu, Genjutsu, Taijutsu", "Rinnegan")
+					("example.jpg", "Naruto Uzumaki", "Human", "Konohagakure", "Prologue", "Team 7, Kage", "Wind", "None", "Ninjutsu, Taijutsu", "Sage Mode, Jinchūriki"),
+					("example.jpg", "Sasuke Uchiha", "Human", "Konohagakure", "Prologue", "Team 7, Taka, Akatsuki", "Earth, Fire, Wind, Water, Lightning", "Sharingan", "Ninjutsu, Genjutsu, Taijutsu", "Eternal Mangekyō Sharingan, Rinnegan, Rinnesharingan"),
+					("example.jpg", "Sakura Haruno", "Human", "Konohagakure", "Prologue", "Team 7", "Wind", "None", "Taijutsu, Genjutsu", "None"),
+					("example.jpg", "Kakashi Hatake", "Human", "Konohagakure", "Prologue", "Team 7, ANBU, Kage", "Lightning", "Sharingan", "Ninjutsu, Taijutsu, Genjutsu", "Mangekyō Sharingan"),
+					("example.jpg", "Hashirama Senju", "Human", "Konohagakure", "Konoha Crush", "Kage", "Water, Earth, Wood", "None", "Ninjutsu, Taijutsu", "Sage Mode"),
+					("example.jpg", "Tobirama Senju", "Human", "Konohagakure", "Konoha Crush", "Kage", "Water, Earth", "None", "Ninjutsu, Taijutsu, Genjutsu", "Edo Tensei"),
+					("example.jpg", "Hiruzen Sarutobi", "Human", "Konohagakure", "Prologue", "Kage", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "None"),
+					("example.jpg", "Madara Uchiha", "Human", "Konohagakure", "Tale of Jiraiya the Gallant", "Akatsuki", "Earth, Fire, Wind, Water, Lightning, Wood, Storm", "Sharingan", "Ninjutsu, Taijutsu, Genjutsu", "Eternal Mangekyō Sharingan, Rinnegan, Rinnesharingan, Jinchūriki")
 				ON DUPLICATE KEY UPDATE name = VALUES(name);`
 	if _, err := db.Exec(insert_naruto); err != nil {
 		return err

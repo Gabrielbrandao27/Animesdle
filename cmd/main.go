@@ -17,10 +17,12 @@ func main() {
 	animeRepo := anime.NewAnimeRepository(db)
 	animeService := anime.NewAnimeService(animeRepo)
 
-	animeHandler := anime.NewAnimeHandler(animeService)
+	animeRepositoryHandler := anime.NewAnimeRepositoryHandler(animeRepo)
+	animeServiceHandler := anime.NewAnimeHandler(animeService)
 
-	http.HandleFunc("/start-game", animeHandler.StartGameHandler)
-	http.HandleFunc("/attempt", animeHandler.AttemptHandler)
+	http.HandleFunc("/start-game", animeServiceHandler.StartGameHandler)
+	http.HandleFunc("/attempt", animeServiceHandler.AttemptHandler)
+	http.HandleFunc("/delete", animeRepositoryHandler.DeleteRowsHandler)
 	http.ListenAndServe(":8080", nil)
 
 }
