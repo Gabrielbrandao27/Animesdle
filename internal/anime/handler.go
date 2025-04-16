@@ -12,8 +12,8 @@ type AnimeHandler struct {
 	service AnimeService
 }
 
-type AnimeHandlerRepository struct {
-	repository AnimeRepository
+type AdminAnimeHandler struct {
+	admin AdminService
 }
 
 type AttemptRequest struct {
@@ -26,8 +26,8 @@ func NewAnimeHandler(service AnimeService) *AnimeHandler {
 	return &AnimeHandler{service: service}
 }
 
-func NewAnimeRepositoryHandler(repository AnimeRepository) *AnimeHandlerRepository {
-	return &AnimeHandlerRepository{repository: repository}
+func NewAdminAnimeHandler(admin AdminService) *AdminAnimeHandler {
+	return &AdminAnimeHandler{admin: admin}
 }
 
 func (h *AnimeHandler) StartGameHandler(w http.ResponseWriter, r *http.Request) {
@@ -83,7 +83,7 @@ func (h *AnimeHandler) AttemptHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(result)
 }
 
-func (repo *AnimeHandlerRepository) DeleteRowsHandler(w http.ResponseWriter, r *http.Request) {
+func (a *AdminAnimeHandler) DeleteRowsHandler(w http.ResponseWriter, r *http.Request) {
 	token := r.Header.Get("Authorization")
 	expectedToken := os.Getenv("TOKEN")
 
@@ -110,13 +110,13 @@ func (repo *AnimeHandlerRepository) DeleteRowsHandler(w http.ResponseWriter, r *
 	}
 
 	if id == nil {
-		err := repo.repository.DeleteRows(r.Context(), anime, nil)
+		err := a.admin.DeleteRows(r.Context(), anime, nil)
 		if err != nil {
 			http.Error(w, "error deleting rows: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
 	} else {
-		err := repo.repository.DeleteRows(r.Context(), anime, id)
+		err := a.admin.DeleteRows(r.Context(), anime, id)
 		if err != nil {
 			http.Error(w, "error deleting rows: "+err.Error(), http.StatusInternalServerError)
 			return
@@ -125,4 +125,66 @@ func (repo *AnimeHandlerRepository) DeleteRowsHandler(w http.ResponseWriter, r *
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Rows deleted successfully"))
+}
+
+func (a *AdminAnimeHandler) DropTableHandler(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("Authorization")
+	expectedToken := os.Getenv("TOKEN")
+
+	if token != expectedToken {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	anime := r.URL.Query().Get("anime")
+	if anime == "" {
+		http.Error(w, "anime parameter is required", http.StatusBadRequest)
+		return
+	}
+
+	err := a.admin.DropTable(r.Context(), anime)
+	if err != nil {
+		http.Error(w, "error dropping table: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Table dropped successfully"))
+}
+
+func (a *AdminAnimeHandler) AlterColumnSizeHandler(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("Authorization")
+	expectedToken := os.Getenv("TOKEN")
+
+	if token != expectedToken {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	anime := r.URL.Query().Get("anime")
+	if anime == "" {
+		http.Error(w, "anime parameter is required", http.StatusBadRequest)
+		return
+	}
+
+	column := r.URL.Query().Get("column")
+	if column == "" {
+		http.Error(w, "column parameter is required", http.StatusBadRequest)
+		return
+	}
+
+	newSize := r.URL.Query().Get("newSize")
+	if newSize == "" {
+		http.Error(w, "newSize parameter is required", http.StatusBadRequest)
+		return
+	}
+
+	err := a.admin.AlterColumnSize(r.Context(), anime, column, newSize)
+	if err != nil {
+		http.Error(w, "error altering column size: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Column size altered successfully"))
 }

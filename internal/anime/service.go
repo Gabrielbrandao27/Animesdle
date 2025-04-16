@@ -3,8 +3,6 @@ package anime
 import (
 	"context"
 	"errors"
-	"fmt"
-	"strings"
 )
 
 type AnimeService interface {
@@ -49,7 +47,7 @@ func (s *animeServiceStruct) ProcessAttempt(ctx context.Context, currentCharacte
 		}
 
 		result := NarutoComparisonResult{
-			Name:             selectedNaruto.Name,
+			Name:             guessedNaruto.Name,
 			Species:          compareStrings(selectedNaruto.Species, guessedNaruto.Species),
 			PlaceOrigin:      compareStrings(selectedNaruto.PlaceOrigin, guessedNaruto.PlaceOrigin),
 			IntroArc:         compareStrings(selectedNaruto.IntroArc, guessedNaruto.IntroArc),
@@ -81,26 +79,4 @@ func (s *animeServiceStruct) ProcessAttempt(ctx context.Context, currentCharacte
 		return result, nil
 	}
 	return nil, nil
-}
-
-func compareStrings(expected, actual string) FieldComparison {
-	switch {
-	case expected == actual:
-		return FieldComparison{Value: actual, Status: "correct"}
-	case strings.Contains(expected, actual) || strings.Contains(actual, expected):
-		return FieldComparison{Value: actual, Status: "partial"}
-	default:
-		return FieldComparison{Value: actual, Status: "wrong"}
-	}
-}
-
-func compareInts(expected, actual int) FieldComparison {
-	switch {
-	case expected == actual:
-		return FieldComparison{Value: fmt.Sprintf("%d", actual), Status: "correct"}
-	case actual < expected:
-		return FieldComparison{Value: fmt.Sprintf("%d", actual), Status: "less"}
-	default:
-		return FieldComparison{Value: fmt.Sprintf("%d", actual), Status: "greater"}
-	}
 }

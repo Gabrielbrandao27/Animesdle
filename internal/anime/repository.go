@@ -10,7 +10,6 @@ import (
 type AnimeRepository interface {
 	GetAnimeCharacter(ctx context.Context, name string, anime string) (any, error)
 	GetRandomCharacter(ctx context.Context, anime string) (any, error)
-	DeleteRows(ctx context.Context, anime string, id *int64) error
 }
 
 type mysqlAnimeRepository struct {
@@ -137,33 +136,4 @@ func (r *mysqlAnimeRepository) GetRandomCharacter(ctx context.Context, anime str
 		return character, nil
 	}
 	return nil, nil
-}
-
-func (r *mysqlAnimeRepository) DeleteRows(ctx context.Context, anime string, id *int64) error {
-	var query string
-
-	switch anime {
-	case "Naruto":
-		if id != nil {
-			query = "DELETE FROM characters_naruto WHERE id = ?"
-		} else {
-			query = "DELETE FROM characters_naruto"
-		}
-	case "One Piece":
-		if id != nil {
-			query = "DELETE FROM characters_onepiece WHERE id = ?"
-		} else {
-			query = "DELETE FROM characters_onepiece"
-		}
-	default:
-		return errors.New("invalid anime type")
-	}
-
-	if id != nil {
-		_, err := r.db.ExecContext(ctx, query, *id)
-		return err
-	}
-
-	_, err := r.db.ExecContext(ctx, query)
-	return err
 }
