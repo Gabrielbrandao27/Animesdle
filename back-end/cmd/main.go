@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/Gabrielbrandao27/Animesdle/internal/anime"
-	"github.com/Gabrielbrandao27/Animesdle/pkg/database"
+	"github.com/Gabrielbrandao27/Animesdle/back-end/internal/anime"
+	"github.com/Gabrielbrandao27/Animesdle/back-end/pkg/database"
 	_ "github.com/go-sql-driver/mysql"
 )
 
