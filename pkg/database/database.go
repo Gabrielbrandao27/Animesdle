@@ -24,7 +24,7 @@ func RunMigrations(db *sql.DB) error {
 		CREATE TABLE IF NOT EXISTS characters_naruto (
 			id INT AUTO_INCREMENT PRIMARY KEY,
 			img_ref VARCHAR(255) NOT NULL,
-			name VARCHAR(100) NOT NULL,
+			name VARCHAR(100) NOT NULL UNIQUE,
 			species VARCHAR(100) NOT NULL,
 			place_origin VARCHAR(100) NOT NULL,
 			intro_arc VARCHAR(255) NOT NULL,
@@ -43,7 +43,7 @@ func RunMigrations(db *sql.DB) error {
 		CREATE TABLE IF NOT EXISTS characters_onepiece (
 			id INT AUTO_INCREMENT PRIMARY KEY,
 			img_ref VARCHAR(255) NOT NULL,
-			name VARCHAR(100) NOT NULL,
+			name VARCHAR(100) NOT NULL UNIQUE,
 			species VARCHAR(255) NOT NULL,
 			place_origin VARCHAR(255) NOT NULL,
 			intro_arc VARCHAR(100) NOT NULL,
