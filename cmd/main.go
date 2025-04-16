@@ -16,11 +16,16 @@ func main() {
 
 	animeRepo := anime.NewAnimeRepository(db)
 	animeService := anime.NewAnimeService(animeRepo)
+	adminService := anime.NewAdminService(db)
 
-	animeHandler := anime.NewAnimeHandler(animeService)
+	animeServiceHandler := anime.NewAnimeHandler(animeService)
+	adminServiceHandler := anime.NewAdminAnimeHandler(adminService)
 
-	http.HandleFunc("/start-game", animeHandler.StartGameHandler)
-	http.HandleFunc("/attempt", animeHandler.AttemptHandler)
+	http.HandleFunc("/start-game", animeServiceHandler.StartGameHandler)
+	http.HandleFunc("/attempt", animeServiceHandler.AttemptHandler)
+	http.HandleFunc("/admin/delete-rows", adminServiceHandler.DeleteRowsHandler)
+	http.HandleFunc("/admin/drop-table", adminServiceHandler.DropTableHandler)
+	http.HandleFunc("/admin/alter-column-size", adminServiceHandler.AlterColumnSizeHandler)
 	http.ListenAndServe(":8080", nil)
 
 }
