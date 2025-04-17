@@ -1,4 +1,4 @@
-module github.com/Gabrielbrandao27/Animesdle
+module github.com/Gabrielbrandao27/Animesdle/back-end
 
 go 1.24.2
 

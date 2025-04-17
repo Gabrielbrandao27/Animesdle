@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Gabrielbrandao27/Animesdle/pkg/database"
+	"github.com/Gabrielbrandao27/Animesdle/back-end/pkg/database"
 	_ "github.com/go-sql-driver/mysql"
 )
 
