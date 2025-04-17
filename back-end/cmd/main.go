@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Gabrielbrandao27/Animesdle/back-end/internal/anime"
+	myhttp "github.com/Gabrielbrandao27/Animesdle/back-end/internal/http"
 	"github.com/Gabrielbrandao27/Animesdle/back-end/pkg/database"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -21,11 +22,16 @@ func main() {
 	animeServiceHandler := anime.NewAnimeHandler(animeService)
 	adminServiceHandler := anime.NewAdminAnimeHandler(adminService)
 
-	http.HandleFunc("/start-game", animeServiceHandler.StartGameHandler)
-	http.HandleFunc("/attempt", animeServiceHandler.AttemptHandler)
-	http.HandleFunc("/admin/delete-rows", adminServiceHandler.DeleteRowsHandler)
-	http.HandleFunc("/admin/drop-table", adminServiceHandler.DropTableHandler)
-	http.HandleFunc("/admin/alter-column-size", adminServiceHandler.AlterColumnSizeHandler)
-	http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/start-game", animeServiceHandler.StartGameHandler)
+	mux.HandleFunc("/attempt", animeServiceHandler.AttemptHandler)
+	mux.HandleFunc("/admin/delete-rows", adminServiceHandler.DeleteRowsHandler)
+	mux.HandleFunc("/admin/drop-table", adminServiceHandler.DropTableHandler)
+	mux.HandleFunc("/admin/alter-column-size", adminServiceHandler.AlterColumnSizeHandler)
+
+	handlerWithCORS := myhttp.CorsMiddleware(mux)
+
+	http.ListenAndServe(":8080", handlerWithCORS)
 
 }

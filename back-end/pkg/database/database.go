@@ -65,13 +65,24 @@ func RunMigrations(db *sql.DB) error {
 					("example.jpg", "Sasuke Uchiha", "Human", "Konohagakure", "Prologue", "Team 7, Taka, Akatsuki", "Earth, Fire, Wind, Water, Lightning", "Sharingan", "Ninjutsu, Genjutsu, Taijutsu", "Eternal Mangekyō Sharingan, Rinnegan, Rinnesharingan"),
 					("example.jpg", "Sakura Haruno", "Human", "Konohagakure", "Prologue", "Team 7", "Wind", "None", "Taijutsu, Genjutsu", "Creation Rebirth"),
 					("example.jpg", "Kakashi Hatake", "Human", "Konohagakure", "Prologue", "Team Minato, Team 7, ANBU, Kage", "Lightning", "Sharingan", "Ninjutsu, Taijutsu, Genjutsu", "Mangekyō Sharingan"),
-					("example.jpg", "Hashirama Senju", "Human", "Konohagakure", "Konoha Crush", "Kage", "Water, Earth, Wood", "None", "Ninjutsu, Taijutsu", "Sage"),
+					("example.jpg", "Hashirama Senju", "Human", "Konohagakure", "Konoha Crush", "Kage", "Water, Earth", "Wood", "Ninjutsu, Taijutsu", "Sage"),
 					("example.jpg", "Tobirama Senju", "Human", "Konohagakure", "Konoha Crush", "Kage", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Edo Tensei"),
 					("example.jpg", "Hiruzen Sarutobi", "Human", "Konohagakure", "Prologue", "Kage", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "None"),
 					("example.jpg", "Minato Namikaze", "Human", "Konohagakure", "Kakashi Gaiden", "Team Minato, Kage, Mount Myōboku", "Fire, Wind, Lightning", "None", "Ninjutsu, Taijutsu", "Sage, Jinchūriki"),
 					("example.jpg", "Tsunade Senju", "Human", "Konohagakure", "Search For Tsunade", "Kage, Legendary Sannin", "Earth, Fire, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Creation Rebirth"),
 					("example.jpg", "Jiraiya", "Human", "Konohagakure", "Chunnin Exams", "Legendary Sannin, Mount Myōboku", "Earth, Fire, Water, Wind", "None", "Ninjutsu, Taijutsu, Genjutsu", "Sage"),
-					("example.jpg", "Madara Uchiha", "Human", "Konohagakure", "Tale of Jiraiya the Gallant", "Akatsuki", "Earth, Fire, Wind, Water, Lightning, Wood, Storm", "Sharingan", "Ninjutsu, Taijutsu, Genjutsu", "Sage, Eternal Mangekyō Sharingan, Rinnegan, Rinnesharingan, Jinchūriki")
+					("example.jpg", "Madara Uchiha", "Human", "Konohagakure", "Tale of Jiraiya the Gallant", "Akatsuki", "Earth, Fire, Wind, Water, Lightning", "Sharingan, Wood, Storm", "Ninjutsu, Taijutsu, Genjutsu", "Sage, Eternal Mangekyō Sharingan, Rinnegan, Rinnesharingan, Jinchūriki"),
+					("example.jpg", "Haku", "Human", "Kirigakure", "Land of Waves", "Mercenary", "Water", "Ice", "Ninjutsu, Taijutsu, Genjutsu", "None"),
+					("example.jpg", "Zabuza Momochi", "Human", "Kirigakure", "Land of Waves", "Missing-nin, Mercenary, Seven Ninja Swordsmen of the Mist", "Water", "None", "Ninjutsu, Taijutsu, Genjutsu", "None"),
+					("example.jpg", "Rock Lee", "Human", "Konohagakure", "Prologue", "Team Guy", "Earth, Fire, Wind, Water, Lightning", "None", "Taijutsu, Ninjutsu, Genjutsu", "None"),
+					("example.jpg", "Neji Hyuga", "Human", "Konohagakure", "Prologue", "Team Guy", "Earth, Fire, Wind, Water, Lightning", "Byakugan", "Ninjutsu, Taijutsu, Genjutsu", "None"),
+					("example.jpg", "Tenten", "Human", "Konohagakure", "Prologue", "Team Guy", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "None"),
+					("example.jpg", "Shikamaru Nara", "Human", "Konohagakure", "Prologue", "Team 10", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Shadow Manipulation"),
+					("example.jpg", "Ino Yamanaka", "Human", "Konohagakure", "Prologue", "Team 10", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Mind Transfer Jutsu"),
+					("example.jpg", "Choji Akimichi", "Human", "Konohagakure", "Prologue", "Team 10", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Expansion Jutsu"),
+					("example.jpg", "Kiba Inuzuka", "Human", "Konohagakure", "Prologue", "Team 8", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Beast Mimicry"),
+					("example.jpg", "Hinata Hyuga", "Human", "Konohagakure", "Prologue", "Team 8", "Earth, Fire, Wind, Water, Lightning", "Byakugan", "Ninjutsu, Taijutsu, Genjutsu", "Gentle Fist"),
+					("example.jpg", "Shino Aburame", "Human", "Konohagakure", "Prologue", "Team 8", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Insect Manipulation")
 				ON DUPLICATE KEY UPDATE name = VALUES(name);`
 	if _, err := db.Exec(insert_naruto); err != nil {
 		return err
