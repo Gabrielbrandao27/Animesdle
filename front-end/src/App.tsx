@@ -1,12 +1,21 @@
-import { useNavigate } from 'react-router-dom';
-import './App.css';
-import animedleLogo from '/naruto.svg';
+import { useNavigate } from "react-router-dom";
+import { startGame } from "./api/gameService";
+import "./App.css";
+import { useCharacter } from "./context/useCharacter";
+import animedleLogo from "/naruto.svg";
 
 function App() {
   const navigate = useNavigate();
+  const { setCharacter } = useCharacter();
 
-  const handleStartGame = () => {
-    navigate('/start-game');
+  const handleStartGame = async () => {
+    try {
+      const data = await startGame("Naruto"); // ou "One Piece", futuramente podemos colocar dropdown
+      setCharacter(data);
+      navigate("/game");
+    } catch (error) {
+      console.error("Erro ao iniciar jogo:", error);
+    }
   };
 
   return (
@@ -20,7 +29,7 @@ function App() {
         Start Game
       </button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
