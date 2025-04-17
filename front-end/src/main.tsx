@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import App from './App.tsx'
 import GamePage from './components/GamePage.tsx'
-import { CharacterProvider } from './context/CharacterContext'; // ajuste o caminho conforme a pasta
+import { CharacterProvider } from './context/CharacterContext'
 import './index.css'
 
 

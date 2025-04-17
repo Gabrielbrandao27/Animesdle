@@ -10,7 +10,7 @@ function App() {
 
   const handleStartGame = async () => {
     try {
-      const data = await startGame("Naruto"); // ou "One Piece", futuramente podemos colocar dropdown
+      const data = await startGame("Naruto");
       setCharacter(data);
       navigate("/game");
     } catch (error) {
