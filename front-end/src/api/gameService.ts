@@ -21,7 +21,7 @@ export const ProcessAttempt = async <T>(data: {
     const payload = {
       name: data.name,
       anime: data.anime,
-      currentCharacter: JSON.stringify(data.currentCharacter),
+      currentCharacter: data.currentCharacter,
     };
     const response = await axiosInstance.post("/attempt", payload, {
       headers: {
