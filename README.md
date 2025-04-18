@@ -1,4 +1,4 @@
-# Animesdle
+# Animesdle 🥷🍜
 Go Learning Project!
 
 Based on a webpage game that I like to play with my friends.
@@ -8,15 +8,15 @@ Web Application similar to a "Wordle", but for Animes!
 # Stpes for running the Game:
 
 ## Prerequisites:
-* Frontend (React + Vite)
-  - Node.js v18 or higher
-- npm or yarn – for package managing..
+* 💻 Frontend (React + Vite)
+    - Node.js v18 or higher
+    - npm or yarn – for package managing..
 
-* Backend (Golang)
-- Go v1.20 or higher
+* 🔙 Backend (Golang)
+    - Go v1.20 or higher
 
-* Docker
-- https://docs.docker.com/get-started/get-docker/
+* 🗃️ Docker
+    - https://docs.docker.com/get-started/get-docker/
 
 ## Tutorial for running locally:
 1. `docker pull gabrielbrandao2711/animesdle-mysql` pulls the imagem with the character tables and data
