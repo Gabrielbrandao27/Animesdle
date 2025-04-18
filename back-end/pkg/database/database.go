@@ -85,8 +85,22 @@ func RunMigrations(db *sql.DB) error {
 					("example.jpg", "Shino Aburame", "Human", "Konohagakure", "Chunin Exams", "Team 8", "Earth, Fire", "None", "Ninjutsu", "Insect Manipulation"),
 					("example.jpg", "Gaara", "Human", "Sunagakure", "Chunin Exams", "kage", "Wind, Earth, Lightning", "None", "Ninjutsu, Taijutsu", "Jinchūriki"),
 					("example.jpg", "Temari", "Human", "Sunagakure", "Chunin Exams", "None", "Wind", "None", "Ninjutsu, Taijutsu", "None"),
-					("example.jpg", "Kankuro", "Human", "Sunagakure", "Chunin Exams", "None", "Earth, Wind", "None", "Ninjutsu, Taijutsu", "Puppet Manipulation"),
-					("example.jpg", "Orochimaru", "Human", "Konohagakure", "Chunin Exams", "Missing-Nin, Akatsuki, Legendary Sannin, Otogakure", "Earth, Fire, Water, Wind, Lightning", "Wood", "Ninjutsu, Taijutsu, Genjutsu", "Edo Tensei")
+					("example.jpg", "Kankuro", "Human", "Sunagakure", "Chunin Exams", "None", "Earth, Wind", "None", "None", "Puppet Manipulation"),
+					("example.jpg", "Orochimaru", "Human", "Konohagakure", "Chunin Exams", "Missing-Nin, Akatsuki, Legendary Sannin, Otogakure", "Earth, Fire, Water, Wind, Lightning", "Wood", "Ninjutsu, Taijutsu, Genjutsu", "Edo Tensei"),
+					("example.jpg", "Kabuto Yakushi", "Human", "Konohagakure", "Chunin Exams", "Akatsuki, Otogakure", "Earth, Water, Wind", "None", "Ninjutsu, Taijutsu, Genjutsu", "Sage, Edo Tensei"),
+					("example.jpg", "Itachi Uchiha", "Human", "Konohagakure", "Search for Tsunade", "ANBU, Akatsuki, Missing-nin", "Fire, Wind, Water", "Sharingan", "Ninjutsu, Taijutsu, Genjutsu", "Mangekyō Sharingan"),
+					("example.jpg", "Kisame Hoshigaki", "Human", "Kirigakure", "Search for Tsunade", "Akatsuki, Missing-nin, Seven Ninja Swordsmen of the Mist", "Water", "None", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Deidara", "Human", "Iwagakure", "Kazekage Rescue Mission", "Akatsuki, Missing-nin", "Earth", "Explosion", "Ninjutsu", "None"),
+					("example.jpg", "Sasori", "Human", "Sunagakure", "Kazekage Rescue Mission", "Akatsuki, Missing-nin", "None", "None", "None", "Puppet Manipulation"),
+					("example.jpg", "Hidan", "Human", "Yugakure", "Akatsuki Suppression Mission", "Akatsuki, Missing-nin, Jashinists", "None", "None", "Taijutsu", "Immortality"),
+					("example.jpg", "Kakuzu", "Human", "Takigakure", "Akatsuki Suppression Mission", "Akatsuki, Missing-nin", "Earth, Fire, Water, Wind, Lightning", "None", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Yahiko", "Human", "Amegakure", "Tale of Jiraiya the Gallant", "Akatsuki, Missing-nin", "None", "None", "Ninjutsu, Taijutsu", "Rinnegan"),
+					("example.jpg", "Konan", "Human", "Amegakure", "Itachi Persuit Mission", "Akatsuki, Missing-nin", "Earth, Water, Wind", "None", "Ninjutsu, Taijutsu", "Paper Jutsu"),
+					("example.jpg", "Nagato", "Human", "Amegakure", "Tale of Jiraiya the Gallant", "Akatsuki, Missing-nin", "Earth, Fire, Water, Wind, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Rinnegan"),
+					("example.jpg", "Obito Uchiha", "Human", "Konohagakure", "Kakashi Gaiden", "Akatsuki, Missing-nin, Team Minato", "Earth, Fire, Wind, Water, Lightning", "Sharingan, Wood", "Ninjutsu, Taijutsu, Genjutsu", "Mangekyō Sharingan, Rinnegan, Jinchūriki"),
+					("example.jpg", "Kaguya Otsutsuki", "Celestial Beign", "Land of Ancestors", "Kaguya Otsutsuki Strikes", "None", "Earth, Fire, Wind, Water, Lightning", "Byakugan, Shikotsumyaku (Bones)", "Ninjutsu, Taijutsu, Genjutsu", "Rinnesharingan"),
+					("example.jpg", "White Zetsu", "Mutated Human", "Unknown", "Sasuke Recovery Mission", "Akatsuki, Missing-nin", "None", "Wood", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Black Zetsu", "Artificial Human", "Unknown", "Sasuke Recovery Mission", "Akatsuki, Missing-nin", "None", "None", "Ninjutsu, Taijutsu", "None")
 				ON DUPLICATE KEY UPDATE name = VALUES(name);`
 	if _, err := db.Exec(insert_naruto); err != nil {
 		return err
