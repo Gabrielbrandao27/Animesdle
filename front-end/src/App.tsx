@@ -19,7 +19,7 @@ function App() {
       localStorage.setItem("selectedAnime", selectedAnime);
       navigate("/game");
     } catch (error) {
-      console.error("Erro ao iniciar jogo:", error);
+      console.error("Error starting game:", error);
     }
   };
 
@@ -32,7 +32,7 @@ function App() {
       <p>Wordle like game but for Anime!</p>
 
       {/* Dropdown com as opções de anime */}
-      <label htmlFor="anime-select">Escolha um anime:</label>
+      <label htmlFor="anime-select">Choose an anime:</label>
       <select
         id="anime-select"
         value={selectedAnime}

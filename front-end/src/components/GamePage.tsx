@@ -25,9 +25,9 @@ const GamePage: React.FC = () => {
         currentCharacter: character,
       });
       setAttemptResult(response);      
-      console.log("Resultado da tentativa:", response);
+      console.log("Attempt result:", response);
     } catch (error) {
-      console.error("Erro ao tentar personagem:", error);
+      console.error("Error processing attempt:", error);
     }
   };
 
@@ -38,12 +38,12 @@ const GamePage: React.FC = () => {
             type="text"
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}
-            placeholder="Digite o nome do personagem"
+            placeholder="Type the character name"
         />
         <button onClick={handleSearch}>Search</button>
         {attemptResult && (
         <div>
-            <h3>Resultado da tentativa:</h3>
+            <h3>Attempt Result:</h3>
             <pre>{JSON.stringify(attemptResult, null, 2)}</pre>
         </div>
         )}
