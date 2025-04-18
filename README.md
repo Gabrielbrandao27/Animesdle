@@ -5,7 +5,7 @@ Based on a webpage game that I like to play with my friends.
 
 Web Application similar to a "Wordle", but for Animes!
 
-# Stpes for running the Game:
+# Steps for running the Game:
 
 ## Prerequisites:
 * 💻 Frontend (React + Vite)
