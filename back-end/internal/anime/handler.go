@@ -3,6 +3,7 @@ package anime
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
 	"strconv"
@@ -17,7 +18,7 @@ type AdminAnimeHandler struct {
 }
 
 type AttemptRequest struct {
-	AttemptedName    string          `json:"AttemptedName"`
+	AttemptedName    string          `json:"name"`
 	Anime            string          `json:"anime"`
 	CurrentCharacter json.RawMessage `json:"currentCharacter"`
 }
@@ -53,15 +54,21 @@ func (h *AnimeHandler) AttemptHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid request body", http.StatusBadRequest)
 		return
 	}
+	fmt.Println("DEBUG Anime:", req.Anime)
+	fmt.Println("DEBUG Attempted Name:", req.AttemptedName)
+	fmt.Println("DEBUG CurrentCharacter JSON:", string(req.CurrentCharacter))
 
 	var currentCharacter any
 	switch req.Anime {
 	case "Naruto":
+		fmt.Println("DEBUG CurrentCharacter JSON:", string(req.CurrentCharacter))
 		var character Naruto
 		if err := json.Unmarshal(req.CurrentCharacter, &character); err != nil {
+			fmt.Println("Unmarshal error (Naruto):", err)
 			http.Error(w, "invalid current character for Naruto", http.StatusBadRequest)
 			return
 		}
+		fmt.Printf("Recebido do frontend:\nAnime: %s\nTentativa: %s\nCharacter: %s\n\n", req.Anime, req.AttemptedName, string(req.CurrentCharacter))
 		currentCharacter = character
 	case "One Piece":
 		var character OnePiece
