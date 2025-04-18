@@ -6,6 +6,7 @@ const GamePage: React.FC = () => {
   const { character } = useCharacter();
   const [inputName, setInputName] = useState<string>("");
   const [selectedAnime, setSelectedAnime] = useState<string>("");
+  const [attemptResult, setAttemptResult] = useState<any>(null);
 
   useEffect(() => {
     const savedAnime = localStorage.getItem("selectedAnime");
@@ -23,7 +24,7 @@ const GamePage: React.FC = () => {
         anime: selectedAnime,
         currentCharacter: character,
       });
-
+      setAttemptResult(response);      
       console.log("Resultado da tentativa:", response);
     } catch (error) {
       console.error("Erro ao tentar personagem:", error);
@@ -40,6 +41,12 @@ const GamePage: React.FC = () => {
             placeholder="Digite o nome do personagem"
         />
         <button onClick={handleSearch}>Search</button>
+        {attemptResult && (
+        <div>
+            <h3>Resultado da tentativa:</h3>
+            <pre>{JSON.stringify(attemptResult, null, 2)}</pre>
+        </div>
+        )}
     </div>
   );
 };
