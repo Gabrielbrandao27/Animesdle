@@ -17,7 +17,7 @@ type AdminAnimeHandler struct {
 }
 
 type AttemptRequest struct {
-	AttemptedName    string          `json:"AttemptedName"`
+	AttemptedName    string          `json:"name"`
 	Anime            string          `json:"anime"`
 	CurrentCharacter json.RawMessage `json:"currentCharacter"`
 }
