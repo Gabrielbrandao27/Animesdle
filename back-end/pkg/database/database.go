@@ -74,15 +74,19 @@ func RunMigrations(db *sql.DB) error {
 					("example.jpg", "Madara Uchiha", "Human", "Konohagakure", "Tale of Jiraiya the Gallant", "Akatsuki", "Earth, Fire, Wind, Water, Lightning", "Sharingan, Wood, Storm", "Ninjutsu, Taijutsu, Genjutsu", "Sage, Eternal Mangekyō Sharingan, Rinnegan, Rinnesharingan, Jinchūriki"),
 					("example.jpg", "Haku", "Human", "Kirigakure", "Land of Waves", "Mercenary", "Water", "Ice", "Ninjutsu, Taijutsu, Genjutsu", "None"),
 					("example.jpg", "Zabuza Momochi", "Human", "Kirigakure", "Land of Waves", "Missing-nin, Mercenary, Seven Ninja Swordsmen of the Mist", "Water", "None", "Ninjutsu, Taijutsu, Genjutsu", "None"),
-					("example.jpg", "Rock Lee", "Human", "Konohagakure", "Prologue", "Team Guy", "Earth, Fire, Wind, Water, Lightning", "None", "Taijutsu, Ninjutsu, Genjutsu", "None"),
-					("example.jpg", "Neji Hyuga", "Human", "Konohagakure", "Prologue", "Team Guy", "Earth, Fire, Wind, Water, Lightning", "Byakugan", "Ninjutsu, Taijutsu, Genjutsu", "None"),
-					("example.jpg", "Tenten", "Human", "Konohagakure", "Prologue", "Team Guy", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "None"),
-					("example.jpg", "Shikamaru Nara", "Human", "Konohagakure", "Prologue", "Team 10", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Shadow Manipulation"),
-					("example.jpg", "Ino Yamanaka", "Human", "Konohagakure", "Prologue", "Team 10", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Mind Transfer Jutsu"),
-					("example.jpg", "Choji Akimichi", "Human", "Konohagakure", "Prologue", "Team 10", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Expansion Jutsu"),
-					("example.jpg", "Kiba Inuzuka", "Human", "Konohagakure", "Prologue", "Team 8", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Beast Mimicry"),
-					("example.jpg", "Hinata Hyuga", "Human", "Konohagakure", "Prologue", "Team 8", "Earth, Fire, Wind, Water, Lightning", "Byakugan", "Ninjutsu, Taijutsu, Genjutsu", "Gentle Fist"),
-					("example.jpg", "Shino Aburame", "Human", "Konohagakure", "Prologue", "Team 8", "Earth, Fire, Wind, Water, Lightning", "None", "Ninjutsu, Taijutsu, Genjutsu", "Insect Manipulation")
+					("example.jpg", "Rock Lee", "Human", "Konohagakure", "Chunin Exams", "Team Guy", "None", "None", "Taijutsu", "Eight Gates"),
+					("example.jpg", "Neji Hyuga", "Human", "Konohagakure", "Chunin Exams", "Team Guy", "Earth, Fire, Water", "Byakugan", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Tenten", "Human", "Konohagakure", "Chunin Exams", "Team Guy", "None", "None", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Shikamaru Nara", "Human", "Konohagakure", "Chunin Exams", "Team 10", "Earth, Fire", "None", "Ninjutsu", "Shadow Manipulation"),
+					("example.jpg", "Ino Yamanaka", "Human", "Konohagakure", "Chunin Exams", "Team 10", "Earth, Fire, Water", "None", "Ninjutsu, Genjutsu", "Mind Transfer Jutsu"),
+					("example.jpg", "Choji Akimichi", "Human", "Konohagakure", "Chunin Exams", "Team 10", "Earth, Fire", "None", "Ninjutsu, Taijutsu", "Expansion Jutsu"),
+					("example.jpg", "Kiba Inuzuka", "Human", "Konohagakure", "Chunin Exams", "Team 8", "Earth", "None", "Ninjutsu, Taijutsu", "Beast Mimicry"),
+					("example.jpg", "Hinata Hyuga", "Human", "Konohagakure", "Chunin Exams", "Team 8", "Fire, Lightning", "Byakugan", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Shino Aburame", "Human", "Konohagakure", "Chunin Exams", "Team 8", "Earth, Fire", "None", "Ninjutsu", "Insect Manipulation"),
+					("example.jpg", "Gaara", "Human", "Sunagakure", "Chunin Exams", "kage", "Wind, Earth, Lightning", "None", "Ninjutsu, Taijutsu", "Jinchūriki"),
+					("example.jpg", "Temari", "Human", "Sunagakure", "Chunin Exams", "None", "Wind", "None", "Ninjutsu, Taijutsu", "None"),
+					("example.jpg", "Kankuro", "Human", "Sunagakure", "Chunin Exams", "None", "Earth, Wind", "None", "Ninjutsu, Taijutsu", "Puppet Manipulation"),
+					("example.jpg", "Orochimaru", "Human", "Konohagakure", "Chunin Exams", "Missing-Nin, Akatsuki, Legendary Sannin, Otogakure", "Earth, Fire, Water, Wind, Lightning", "Wood", "Ninjutsu, Taijutsu, Genjutsu", "Edo Tensei")
 				ON DUPLICATE KEY UPDATE name = VALUES(name);`
 	if _, err := db.Exec(insert_naruto); err != nil {
 		return err

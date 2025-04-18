@@ -6,7 +6,12 @@ const GamePage: React.FC = () => {
   const { character } = useCharacter();
   const [inputName, setInputName] = useState<string>("");
   const [selectedAnime, setSelectedAnime] = useState<string>("");
-  const [attemptResult, setAttemptResult] = useState<any>(null);
+  interface AttemptResult {
+    success: boolean;
+    message: string;
+  }
+
+  const [attemptResult, setAttemptResult] = useState<AttemptResult | null>(null);
 
   useEffect(() => {
     const savedAnime = localStorage.getItem("selectedAnime");
@@ -25,7 +30,6 @@ const GamePage: React.FC = () => {
         currentCharacter: character,
       });
       setAttemptResult(response);      
-      console.log("Attempt result:", response);
     } catch (error) {
       console.error("Error processing attempt:", error);
     }
